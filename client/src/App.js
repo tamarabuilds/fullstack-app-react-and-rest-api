@@ -1,22 +1,13 @@
 import axios from 'axios';
-import './App.css';
 import { useEffect, useState } from 'react'
 
 // App components
+import Courses from './components/Courses';
 
 function App() {
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(()=> {
-  //   console.log(`in fetch`)
-  //   fetch("http://localhost:5000/api/courses")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setCourses(data);
-  //       console.log(data)
-  //     })
-  // },[]);
   
   useEffect(() => {
     // let the app know that data is loading
@@ -37,10 +28,11 @@ function App() {
   
   return (
       <div>
+        <Courses />
         <h2>Hi</h2>
         <h3>Course titles</h3>
         <ul>
-          {courses.map( course => (<li>{course.id}: {course.title}</li>))}
+          {/* {courses.map( course => (<li>{course.id}: {course.title}</li>))} */}
         </ul>
 
       </div>
