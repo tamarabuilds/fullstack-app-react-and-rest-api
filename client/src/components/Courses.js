@@ -1,15 +1,36 @@
-import { useEffect } from "react";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
-const Courses = ({data, changePath}) => {
+const Courses = () => {
+    const [courses, setCourses] = useState(null);
+    // const [loading, setLoading] = useState(true);
+
+    // useEffect(() => {
+    //     changePath('/courses')
+    // });
+
 
     useEffect(() => {
-        changePath('/courses')
-    });
+        // let the app know that data is loading
+        // setLoading(true);
+        axios
+          .get(`http://localhost:5000/api/courses`)
+          .then((response) => {
+            setCourses(response.data);
+            // setLoading(false);
+          })
+          .catch((error)=> {
+            console.log(`Error fetch and parsing the data`, error);
+          });
+      }, []);
+    
+
+    
 
     let listCourses;
     // Create course list if data is not empty
-    if (data.length > 0) {
-        listCourses = data.map( course => 
+    if (courses) {
+        listCourses = courses.map( course => 
             <a className="course--module course--link" href={'/courses/' + course.id} key={course.id}>
                 <h2 className="course--label">Course</h2>
                 <h3 className="course--title">{course.title}</h3>
