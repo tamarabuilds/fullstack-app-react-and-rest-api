@@ -1,10 +1,11 @@
 
 import { Route, Routes } from 'react-router-dom';
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react' 
 
 // App components
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
+import UserSignIn from './components/UserSignIn';
 
 function App() {
   // const [courses, setCourses] = useState(null);
@@ -40,6 +41,7 @@ function App() {
               <Route path='/courses/:id' element={<CourseDetail data={courses} changePath={handlePathChange}/>} /> */}
               <Route path='/' element={<Courses />} />
               <Route path='/courses/:id' element={<CourseDetail />} />
+              <Route path='signin' element={<UserSignIn />} />
             </Routes>
           </>
       </main>
