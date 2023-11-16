@@ -40,7 +40,7 @@ function App() {
           <>
             <Routes>
               <Route path='/' element={<Courses data={courses} changePath={handlePathChange}/>} />
-              {/* <Route path='/:id' element={<CourseDetail />} /> */}
+              <Route path='/courses/:id' element={<CourseDetail data={courses} changePath={handlePathChange}/>} />
             </Routes>
           </>
 
