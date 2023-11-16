@@ -4,7 +4,7 @@ const Courses = ({data, changePath}) => {
 
     useEffect(() => {
         changePath('/courses')
-    },[]);
+    });
 
     let listCourses;
     // Create course list if data is not empty

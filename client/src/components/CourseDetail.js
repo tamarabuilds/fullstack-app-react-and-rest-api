@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const CourseDetail = ({ data, changePath }) => {
+    const { id } = useParams();
     console.log(data)
-    const { id } = useParams(); 
+    console.log(id)
 
     useEffect(() => {
+        console.log(`CourseDetails useEffect with id: ${id}`)
         changePath(`/courses/`+ id)
-    });
+    }, [id]);
 
     return (
         <>
