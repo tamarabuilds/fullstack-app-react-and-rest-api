@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 
 // App components
@@ -8,23 +9,25 @@ import CourseDetail from './components/CourseDetail';
 function App() {
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState('/courses/');
+  const [path, setPath] = useState('/courses');
 
   useEffect(() => {
-    console.log(url)
     // let the app know that data is loading
     setLoading(true);
     axios
-      .get(`http://localhost:5000/api${url}`)
+      .get(`http://localhost:5000/api` + path)
       .then((response) => {
         setCourses(response.data);
-        // console.log(response.data)
         setLoading(false);
       })
       .catch((error)=> {
         console.log(`Error fetch and parsing the data`, error);
       });
-  }, [url]);
+  }, [path]);
+
+  const handlePathChange = (newPath) => {
+    setPath(newPath);
+  };
 
 
   
@@ -35,9 +38,10 @@ function App() {
           <p>Loading...</p>
         ):(
           <>
-          {/* <Courses data={courses}/> */}
-          <CourseDetail data={courses} />
-
+            <Routes>
+              <Route path='/' element={<Courses data={courses} changePath={handlePathChange}/>} />
+              {/* <Route path='/:id' element={<CourseDetail />} /> */}
+            </Routes>
           </>
 
         )}
