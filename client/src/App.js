@@ -16,7 +16,7 @@ function App() {
       .get('http://localhost:5000/api/courses')
       .then((response) => {
         setCourses(response.data);
-        console.log(response.data)
+        // console.log(response.data)
         setLoading(false);
       })
       .catch((error)=> {
@@ -27,15 +27,25 @@ function App() {
 
   
   return (
-      <div>
-        <Courses />
-        <h2>Hi</h2>
-        <h3>Course titles</h3>
-        <ul>
-          {/* {courses.map( course => (<li>{course.id}: {course.title}</li>))} */}
-        </ul>
+    <div>
+      <main>
+        { loading ? (
+          <p>Loading...</p>
+        ):(
+          <>
+          <Courses data={courses}/>
+          <h2>Hi</h2>
+          <h3>Course titles</h3>
+          <ul>
+            {/* {courses.map( course => (<li>{course.id}: {course.title}</li>))} */}
+          </ul>
 
-      </div>
+          </>
+
+        )}
+
+      </main>
+    </div>
 
   );
 }
