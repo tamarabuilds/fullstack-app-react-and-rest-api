@@ -3,17 +3,19 @@ import { useEffect, useState } from 'react'
 
 // App components
 import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
 
 function App() {
   const [courses, setCourses] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [url, setUrl] = useState('/courses/');
 
-  
   useEffect(() => {
+    console.log(url)
     // let the app know that data is loading
     setLoading(true);
     axios
-      .get('http://localhost:5000/api/courses')
+      .get(`http://localhost:5000/api${url}`)
       .then((response) => {
         setCourses(response.data);
         // console.log(response.data)
@@ -22,7 +24,7 @@ function App() {
       .catch((error)=> {
         console.log(`Error fetch and parsing the data`, error);
       });
-  }, []);
+  }, [url]);
 
 
   
@@ -33,12 +35,8 @@ function App() {
           <p>Loading...</p>
         ):(
           <>
-          <Courses data={courses}/>
-          <h2>Hi</h2>
-          <h3>Course titles</h3>
-          <ul>
-            {/* {courses.map( course => (<li>{course.id}: {course.title}</li>))} */}
-          </ul>
+          {/* <Courses data={courses}/> */}
+          <CourseDetail data={courses} />
 
           </>
 
