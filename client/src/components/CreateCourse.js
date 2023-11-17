@@ -13,6 +13,7 @@ const CreateCourse = () => {
     const description = useRef(null);
     const estimatedTime = useRef(null);
     const materialsNeeded = useRef(null);
+    const [errors, setErrors] = useState([]);
 
     // Event handlers
     const handleSubmit = async (event) => {
@@ -27,8 +28,19 @@ const CreateCourse = () => {
 
         // to catch errors when using async/await, we need a try/catch block
         try {
-            // const response = await api('courses', 'POST', course);       
             console.log(`we're in the try block`)
+            const response = await api('/courses', 'POST', course);       
+            console.log(response)
+            if (response.status === 201){
+                console.log(`201 status`)       // Need to be authenticated to post....
+            } else if (response.status === 400){
+                console.log(`400 status`)
+                const data = await response.json();
+                console.log(data)
+                setErrors(data.errors)
+            } else {
+                throw new Error();
+            }
             
         } catch (error) {
             console.log(error);
@@ -44,6 +56,7 @@ const CreateCourse = () => {
     return (
         <div className="wrap">
             <h2>Create Course</h2>
+            <ErrorsDisplay errors={errors} />
             <form onSubmit={handleSubmit}>
                 <div className="main--flex">
                     <div>
