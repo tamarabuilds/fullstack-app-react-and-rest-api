@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../utils/apiHelper";
@@ -6,7 +5,6 @@ import { api } from "../utils/apiHelper";
 const CourseDetail = () => {
     const { id } = useParams();
     const [course, setCourse] = useState();
-    
 
     useEffect(() => {
         const fetchData = async () => {

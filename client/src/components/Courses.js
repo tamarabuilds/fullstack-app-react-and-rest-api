@@ -14,7 +14,7 @@ const Courses = () => {
                     await setCourses(json)
                 } 
             } catch (error) {
-                console.log(`Error fetch and parsing the data`, error)
+                console.log(`Error fetching and parsing the data`, error)
             }
         }
 
