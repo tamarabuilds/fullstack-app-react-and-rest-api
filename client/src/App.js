@@ -1,6 +1,4 @@
-
 import { Route, Routes } from 'react-router-dom';
-// import { useEffect, useState } from 'react' 
 
 // App components
 import Courses from './components/Courses';
@@ -8,6 +6,7 @@ import CourseDetail from './components/CourseDetail';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import CreateCourse from './components/CreateCourse';
+import UpdateCourse from './components/UpdateCourse';
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -24,7 +23,7 @@ function App() {
               <Route path='signup' element={<UserSignUp />} />
               {/* <Route element={<PrivateRoute />}> */}
               <Route path='/courses/create' element={<CreateCourse />} />
-
+              <Route path='/courses/:id/update' element={<UpdateCourse />} />
               {/* </Route> */}
             </Routes>
           </>
