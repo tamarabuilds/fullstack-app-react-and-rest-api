@@ -17,6 +17,7 @@ export const UserProvider = (props) => {
         const response = await api('/users', 'GET', null, credentials);
         console.log(response)
         if (response.status === 200){
+            console.log(`user signing in with status 200`)
             const user = await response.json();
             setAuthUser(credentials.password);          // guessing here...
             // setAuthPassword(user);
