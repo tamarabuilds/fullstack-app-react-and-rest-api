@@ -51,7 +51,7 @@ const UpdateCourse = () => {
             const response = await api(`/courses/${id}`, 'PUT', course);
             console.log(response)
             if (response.status === 204) {
-                console.log(`204 status for UpdateCourse`)
+                console.log(`204 status for UpdateCourse`)      // need to do something if successful
 
             } else if (response.status === 403) {
                 console.log(`403 in UpdateCourse`)
