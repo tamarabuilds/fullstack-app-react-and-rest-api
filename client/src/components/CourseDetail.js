@@ -1,30 +1,33 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { api } from "../utils/apiHelper";
 
 const CourseDetail = () => {
     const { id } = useParams();
     const [course, setCourse] = useState();
-    console.log(id)
     
 
     useEffect(() => {
-        axios
-          .get(`http://localhost:5000/api/courses/${id}`)
-          .then((response) => {
-            setCourse(response.data);
-          })
-          .catch((error)=> {
-            console.log(`Error fetch and parsing the data`, error);
-          });
-      }, [id]);
+        const fetchData = async () => {
+            try {
+                const response = await api(`/courses/${id}`, 'GET')
+                const json = await response.json();
+                if (response.status === 200) {
+                    await setCourse(json);
+                }
+            } catch (error) {
+                console.log(`Error fetching and parsing the data`, error)
+            }
+        }
+        fetchData();
+    }, [])
 
     if (course) {
-        console.log(course)
         // Turn list of materials into li list without empty rows
         let listMaterials;
         if (course.materialsNeeded){
-            listMaterials = course.materialsNeeded.split("* ").filter(Boolean).map( item => <li>{item}</li>);
+            listMaterials = course.materialsNeeded.split("* ").filter(Boolean).map( (item, i) => <li key={i}>{item}</li>);
 
         } else {
             listMaterials = <li>Ask instructor</li>
