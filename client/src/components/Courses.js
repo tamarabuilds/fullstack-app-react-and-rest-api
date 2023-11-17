@@ -1,31 +1,27 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { api } from '../utils/apiHelper'
 
 const Courses = () => {
     const [courses, setCourses] = useState(null);
-    // const [loading, setLoading] = useState(true);
-
-    // useEffect(() => {
-    //     changePath('/courses')
-    // });
-
 
     useEffect(() => {
-        // let the app know that data is loading
-        // setLoading(true);
-        axios
-          .get(`http://localhost:5000/api/courses`)
-          .then((response) => {
-            setCourses(response.data);
-            // setLoading(false);
-          })
-          .catch((error)=> {
-            console.log(`Error fetch and parsing the data`, error);
-          });
-      }, []);
-    
 
-    
+        const fetchData = async () => {
+            try {
+                const response = await api('/courses', 'GET')
+                const json = await response.json();
+                if (response.status === 200) {
+                    await setCourses(json)
+                } 
+            } catch (error) {
+                console.log(`Error fetch and parsing the data`, error)
+            }
+        }
+
+        fetchData();
+    },[]);
+   
 
     let listCourses;
     // Create course list if data is not empty
