@@ -6,9 +6,7 @@ const UserContext = createContext(null);
 
 export const UserProvider = (props) => {
     const cookie = Cookies.get('authenticatedUser');
-    const password = Cookies.get('authenticatedPassword')
     const [authUser, setAuthUser] = useState(cookie ? JSON.parse(cookie) : null);
-    // const [authPassword, setAuthPassword] = useState(password ? JSON.parse(password) : null);
 
 
     const signIn = async (credentials) => {
@@ -20,12 +18,11 @@ export const UserProvider = (props) => {
         if (response.status === 200){
             console.log(`user signing in with status 200`)
             const user = await response.json();
+            user.password = credentials.password;
+            console.log(credentials.password)
             setAuthUser(user);
-            console.log(credentials.password) // guessing here...
-            // setAuthPassword(credentials.password);
             Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 1})
-            // Cookies.set("authenticatedPassword", JSON.stringify(password), {expires: 1})         // Don't want to set plain text pw in cookies  !!!!!
-            return user         // need to send password too?
+            return user
         } else if (response.status === 401) {
             return null
         } else {
@@ -35,9 +32,7 @@ export const UserProvider = (props) => {
 
     const signOut = () => {
         setAuthUser(null);
-        // setAuthPassword(null);
         Cookies.remove('authenticatedUser');
-        // Cookies.remove('authenticatedPassword');
     }
 
     return (

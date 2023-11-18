@@ -6,6 +6,7 @@ import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
 
 const CreateCourse = () => {
+    const { authUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     // State
@@ -26,10 +27,11 @@ const CreateCourse = () => {
             materialsNeeded: materialsNeeded.current.value,
         };
 
+
         // to catch errors when using async/await, we need a try/catch block
         try {
             console.log(`we're in the try block`)
-            const response = await api('/courses', 'POST', course);       
+            const response = await api('/courses', 'POST', course, authUser);       
             console.log(response)
             if (response.status === 201){
                 console.log(`201 status`)       // Need to be authenticated to post....
