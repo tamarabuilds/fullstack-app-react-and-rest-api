@@ -21,6 +21,7 @@ const CreateCourse = () => {
         event.preventDefault();
 
         const course = {
+            userId: authUser.id,
             title: title.current.value,
             description: description.current.value,
             estimatedTime: estimatedTime.current.value,
@@ -30,8 +31,11 @@ const CreateCourse = () => {
 
         // to catch errors when using async/await, we need a try/catch block
         try {
-            console.log(`we're in the try block`)
-            const response = await api('/courses', 'POST', course, authUser);       
+            console.log(`CreateCourse try block`)
+            console.log(authUser)
+            console.log(course)
+            const response = await api('/courses', 'POST', course, authUser);
+                   
             console.log(response)
             if (response.status === 201){
                 console.log(`201 status`)       // Need to be authenticated to post....
@@ -65,7 +69,7 @@ const CreateCourse = () => {
                         <label htmlFor="courseTitle">Course Title</label>
                         <input id="courseTitle" name="courseTitle" type="text" ref={title} defaultValue="" />
 
-                        <p>By Joe Smith</p>
+                        <p>By {authUser.firstName} {authUser.lastName}</p>
 
                         <label htmlFor="courseDescription">Course Description</label>
                         <textarea id="courseDescription" name="courseDescription" ref={description}></textarea>

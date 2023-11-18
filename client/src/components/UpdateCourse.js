@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { api } from "../utils/apiHelper";
 
 import ErrorsDisplay from "./ErrorsDisplay";
@@ -39,6 +39,7 @@ const UpdateCourse = () => {
         event.preventDefault();
 
         const course = {
+            userId: authUser.id,
             title: title.current.value,
             description: description.current.value,
             estimatedTime: estimatedTime.current.value,
@@ -48,14 +49,11 @@ const UpdateCourse = () => {
         // catch errors in try/catch blocks when using async/await
         try {
             console.log('UpdateCourse try block')
-            const response = await api(`/courses/${id}`, 'PUT', course);
+            const response = await api(`/courses/${id}`, 'PUT', course, authUser);
             console.log(response)
             if (response.status === 204) {
-                console.log(`204 status for UpdateCourse`)      // need to do something if successful
-
-            } else if (response.status === 403) {
-                console.log(`403 in UpdateCourse`)
-
+                console.log(`204 status for UpdateCourse`)
+                navigate(`/courses/${id}`);
             } else {
                 const data = await response.json();
                 console.log(data);
@@ -71,7 +69,7 @@ const UpdateCourse = () => {
 
     const handleCancel = (event) => {
         event.preventDefault();
-        navigate('/');
+        navigate(`/courses/${id}`);
     }
     
 
@@ -79,6 +77,7 @@ const UpdateCourse = () => {
         return (
             <div className="wrap">
                 <h2>Update Course</h2>
+                <ErrorsDisplay errors={errors}/>
                 <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>
