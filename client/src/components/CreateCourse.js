@@ -38,7 +38,11 @@ const CreateCourse = () => {
                    
             console.log(response)
             if (response.status === 201){
-                console.log(`201 status`)       // Need to be authenticated to post....
+                console.log(`201 status`)
+                const path = response.headers.get('Location')
+                console.log(response.headers)
+                console.log(path)
+                // navigate(path)
             } else if (response.status === 400){
                 console.log(`400 status`)
                 const data = await response.json();

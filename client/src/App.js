@@ -24,10 +24,10 @@ function App() {
           <Route path='signin' element={<UserSignIn />} />
           <Route path='signup' element={<UserSignUp />} />
           <Route path='signout' element={<UserSignOut />} />
-          {/* <Route element={<PrivateRoute />}> */}
-          <Route path='/courses/create' element={<CreateCourse />} />
-          <Route path='/courses/:id/update' element={<UpdateCourse />} />
-          {/* </Route> */}
+          <Route element={<PrivateRoute />}>
+            <Route path='/courses/create' element={<CreateCourse />} />
+            <Route path='/courses/:id/update' element={<UpdateCourse />} />
+          </Route>
         </Routes>
       </main>
     </div>
