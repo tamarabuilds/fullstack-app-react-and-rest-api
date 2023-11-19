@@ -41,7 +41,7 @@ const CreateCourse = () => {
                 console.log(`201 status`)
                 const path = response.headers.get('Location')
                 console.log(response.headers)
-                console.log(path)
+                console.log(`path: ${path}`)
                 // navigate(path)
             } else if (response.status === 400){
                 console.log(`400 status`)

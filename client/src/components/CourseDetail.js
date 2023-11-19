@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../utils/apiHelper";
 
+import UserContext from "./context/UserContext";
+
 const CourseDetail = () => {
+    const { authUser } = useContext(UserContext);
     const { id } = useParams();
     const [course, setCourse] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,6 +25,23 @@ const CourseDetail = () => {
         fetchData();
     }, [])
 
+    // Event handler
+    const handleDelete = async (event) => {
+        event.preventDefault();
+        const response = await api(`/courses/${id}`, 'DELETE', null, authUser);
+        console.log(response)
+        if (response.status === 204) {
+            console.log(`204 status for handleDelete`)
+            navigate(`/`)
+        }
+        try {
+            console.log(`gonna delete`)
+        } catch(error) {
+            console.log(error)
+        }
+
+    }
+
     if (course) {
         // Turn list of materials into li list without empty rows
         let listMaterials;
@@ -30,12 +51,20 @@ const CourseDetail = () => {
         } else {
             listMaterials = <li>Ask instructor</li>
         }
+
         return (
             <>
                 <div className="actions--bar">
                     <div className="wrap">
+                        { authUser.id === course.User.id  ?
+                        <>
                         <a className="button" href={`/courses/${id}/update`}>Update Course</a>
-                        <a className="button" href="#">Delete Course</a>
+                        {/* <a className="button" href="#">Delete Course</a> */}
+                        <a className="button" onClick={handleDelete}>Delete Course</a>
+                        </>
+                        :
+                        null
+                        }
                         <a className="button button-secondary" href="/">Return to List</a>
                     </div>
                 </div>
