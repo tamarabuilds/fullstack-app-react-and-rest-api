@@ -17,7 +17,7 @@ Install my-project with npm
 ## Optimizations
 
  * Centralized all api calls with an api helper utility function
- * Centralized error messaging in an ErrorDisplay component
+ * Utilizes Location header from api post route to redirect user after newly created course
 
 
 ## Lessons Learned
