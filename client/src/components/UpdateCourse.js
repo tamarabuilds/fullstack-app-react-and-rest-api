@@ -87,14 +87,14 @@ const UpdateCourse = () => {
                             <p>By {course.User.firstName} {course.User.lastName}</p>
     
                             <label htmlFor="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription" ref={description}>{course.description}</textarea>
+                            <textarea id="courseDescription" name="courseDescription" ref={description} value={course.description} />
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
                             <input id="estimatedTime" name="estimatedTime" type="text" ref={estimatedTime} defaultValue={course.estimatedTime} />
     
                             <label htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" ref={materialsNeeded}>{course.materialsNeeded}</textarea>
+                            <textarea id="materialsNeeded" name="materialsNeeded" ref={materialsNeeded} value={course.materialsNeeded} />
                         </div>
                     </div>
                     <button className="button" type="submit">Update Course</button>

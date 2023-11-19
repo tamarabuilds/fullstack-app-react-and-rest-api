@@ -31,18 +31,14 @@ const CreateCourse = () => {
 
         // to catch errors when using async/await, we need a try/catch block
         try {
-            console.log(`CreateCourse try block`)
-            console.log(authUser)
-            console.log(course)
             const response = await api('/courses', 'POST', course, authUser);
-                   
-            console.log(response)
+            for( let entry of response.headers.entries()) {
+                console.log(entry);
+            }
             if (response.status === 201){
                 console.log(`201 status`)
                 const path = response.headers.get('Location')
-                console.log(response.headers)
-                console.log(`path: ${path}`)
-                // navigate(path)
+                navigate(path)
             } else if (response.status === 400){
                 console.log(`400 status`)
                 const data = await response.json();

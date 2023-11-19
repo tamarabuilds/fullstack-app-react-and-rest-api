@@ -105,7 +105,10 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res) => {
 
         // Set the status to 201 Created and end the response
         // Set the location header to "/courses/:id" once they've added the course
-        res.status(201).setHeader('Location', `/courses/${newCourse.id}`).end()
+        res.status(201)
+            .setHeader('Location', `/courses/${newCourse.id}`)
+            .setHeader('Access-Control-Expose-Headers', 'Location')
+            .end()
     } catch (error) {
         console.log('Error: ', error);
 
