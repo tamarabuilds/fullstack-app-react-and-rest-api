@@ -1,3 +1,4 @@
+import Markdown from 'react-markdown';
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../utils/apiHelper";
@@ -43,13 +44,11 @@ const CourseDetail = () => {
     }
 
     if (course) {
-        // Turn list of materials into li list without empty rows
         let listMaterials;
         if (course.materialsNeeded){
-            listMaterials = course.materialsNeeded.split("* ").filter(Boolean).map( (item, i) => <li key={i}>{item}</li>);
-
+            listMaterials = course.materialsNeeded;
         } else {
-            listMaterials = <li>Ask instructor</li>
+            listMaterials = '* Ask instructor';
         }
 
         return (
@@ -59,7 +58,6 @@ const CourseDetail = () => {
                         { authUser.id === course.User.id  ?
                         <>
                         <a className="button" href={`/courses/${id}/update`}>Update Course</a>
-                        {/* <a className="button" href="#">Delete Course</a> */}
                         <a className="button" onClick={handleDelete}>Delete Course</a>
                         </>
                         :
@@ -78,7 +76,7 @@ const CourseDetail = () => {
                             <h4 className="course--name">{course.title}</h4>
                                 <p>By {course.User.firstName} {course.User.lastName}</p>
 
-                                <p>{course.description}</p>
+                                <Markdown>{course.description}</Markdown>
                             </div>
                             <div>
                                 <h3 className="course--detail--title">Estimated Time</h3>
@@ -86,7 +84,7 @@ const CourseDetail = () => {
 
                                 <h3 className="course--detail--title">Materials Needed</h3>
                                 <ul className="course--detail--list">
-                                    {listMaterials}
+                                <Markdown>{listMaterials}</Markdown>
                                 </ul>
                             </div>
                         </div>
