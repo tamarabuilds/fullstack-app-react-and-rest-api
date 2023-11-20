@@ -48,14 +48,6 @@ module.exports = (sequelize) => {
         password: {
             type: DataTypes.STRING,
             allowNull: false,
-            // Defining a custom setter for the model with the set() method
-            // set() receives the value, val, to set the password field
-            set(val){
-                // hash the password with bcrypt.hashSync()
-                const hashedPassword = bcrypt.hashSync(val, 10);
-                // setDataValue() is a Sequelize method used inside setters to update the underlying data value
-                this.setDataValue('password', hashedPassword);
-            },
             validate: {
                 notNull: {
                     msg: 'A password is required'
@@ -63,6 +55,17 @@ module.exports = (sequelize) => {
                 notEmpty: {
                     msg: 'Please provide a password'
                 },
+            },
+            // Defining a custom setter for the model with the set() method
+            // set() receives the value, val, to set the password field
+            set(val){
+                // Conditional to ensure only hashing if val is truthy
+                if (val) {
+                    // hash the password with bcrypt.hashSync()
+                    const hashedPassword = bcrypt.hashSync(val, 10);
+                    // setDataValue() is a Sequelize method used inside setters to update the underlying data value
+                    this.setDataValue('password', hashedPassword);
+                }
             },
         },
     }, { sequelize });

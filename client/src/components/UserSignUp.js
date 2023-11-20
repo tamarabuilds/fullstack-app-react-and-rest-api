@@ -48,6 +48,7 @@ const UserSignUp = () => {
             } else if (response.status === 400) {
                 // if not successful, parse the resulting promise with an await
                 const data = await response.json();
+                console.log(data)
                 setErrors(data.errors);
             } else {
                 throw new Error();
