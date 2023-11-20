@@ -17,9 +17,8 @@ const UpdateCourse = () => {
             try {
                 const response = await api(`/courses/${id}`, 'GET')
                 const json = await response.json();
-                console.log(json)
                 if (response.status === 200) {
-                    await setCourse(json);
+                    setCourse(json);
                 }
             } catch (error) {
                 console.log(`Error fetching and parsing the data`, error);
@@ -49,11 +48,8 @@ const UpdateCourse = () => {
 
         // catch errors in try/catch blocks when using async/await
         try {
-            console.log('UpdateCourse try block')
             const response = await api(`/courses/${id}`, 'PUT', course, authUser);
-            console.log(response)
             if (response.status === 204) {
-                console.log(`204 status for UpdateCourse`)
                 navigate(`/courses/${id}`);
             } else if (response.status === 403) {
                 navigate(`/forbidden`);
@@ -61,7 +57,6 @@ const UpdateCourse = () => {
                 navigate(`/error`);
             } else {
                 const data = await response.json();
-                console.log(data);
                 setErrors(data.errors)
             }
             
@@ -108,7 +103,6 @@ const UpdateCourse = () => {
             </div>
         );
     } else {
-        // <h2>No course details</h2>
         return (
             <NotFound />
         );

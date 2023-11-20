@@ -18,7 +18,7 @@ const CourseDetail = () => {
                 const response = await api(`/courses/${id}`, 'GET')
                 const json = await response.json();
                 if (response.status === 200) {
-                    await setCourse(json);
+                    setCourse(json);
                 } else if (response.status === 500) {
                     navigate(`/error`);
                 }
@@ -34,15 +34,13 @@ const CourseDetail = () => {
     const handleDelete = async (event) => {
         event.preventDefault();
         const response = await api(`/courses/${id}`, 'DELETE', null, authUser);
-        console.log(response)
         if (response.status === 204) {
-            console.log(`204 status for handleDelete`)
+            console.log(`Successfully deleted your course`)
             navigate(`/`)
         } else if (response.status === 500) {
             navigate(`/error`);
         }
         try {
-            console.log(`gonna delete`)
         } catch(error) {
             console.log(error)
             navigate('/error');
@@ -103,7 +101,6 @@ const CourseDetail = () => {
         );
 
     } else {
-        // <h2>No course details</h2>
         return (
             <NotFound />
         );

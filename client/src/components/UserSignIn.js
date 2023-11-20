@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { Link, useNavigate, useLocation} from 'react-router-dom'
+import { useNavigate, useLocation} from 'react-router-dom'
 
 import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
@@ -8,7 +8,6 @@ const UserSignIn = () => {
     const { actions } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location)
 
 
     // State
@@ -19,7 +18,6 @@ const UserSignIn = () => {
     // Event handlers
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(`submit was hit`)
 
         // Redirect the user to their previous screen after successfully signing in 
         let from = '/'

@@ -33,9 +33,8 @@ const UserSignUp = () => {
             if (response.status === 201) {
                 console.log(`${user.firstName} ${user.lastName} is successfully signed up and authenticated!`)
                 await actions.signIn(user)
-                await console.log(`signed in??`)
+                navigate('/')
             } else if (response.status === 400) {
-                console.log(`we got a status 400`)
                 // if not successful, parse the resulting promise with an await
                 const data = await response.json();
                 setErrors(data.errors);

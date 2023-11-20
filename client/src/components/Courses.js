@@ -13,7 +13,7 @@ const Courses = () => {
                 const response = await api('/courses', 'GET')
                 const json = await response.json();
                 if (response.status === 200) {
-                    await setCourses(json)
+                    setCourses(json)
                 } else if (response.status === 500) {
                     navigate(`/error`);
                 }

@@ -38,7 +38,6 @@ Install my-project with npm
 * Structure, style and CSS were updated:
   * Updated font to Lexend to improve readability. Learn more: https://www.lexend.com/
   * A custom logo favicon was added as a little star.
-  * -----Background image was update with no repeating and responds to page size changes.
 
 
 ## Contributing
