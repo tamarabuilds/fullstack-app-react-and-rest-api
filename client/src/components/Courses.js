@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { api } from '../utils/apiHelper'
+import { useNavigate } from "react-router-dom";
 
 const Courses = () => {
     const [courses, setCourses] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -12,9 +14,12 @@ const Courses = () => {
                 const json = await response.json();
                 if (response.status === 200) {
                     await setCourses(json)
-                } 
+                } else if (response.status === 500) {
+                    navigate(`/error`);
+                }
             } catch (error) {
                 console.log(`Error fetching and parsing the data`, error)
+                navigate('/error');
             }
         }
 

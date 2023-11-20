@@ -4,6 +4,7 @@ import { api } from "../utils/apiHelper";
 
 import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
+import NotFound from "./NotFound";
 
 const UpdateCourse = () => {
     const { authUser } = useContext(UserContext);
@@ -54,6 +55,10 @@ const UpdateCourse = () => {
             if (response.status === 204) {
                 console.log(`204 status for UpdateCourse`)
                 navigate(`/courses/${id}`);
+            } else if (response.status === 403) {
+                navigate(`/forbidden`);
+            } else if (response.status === 500) {
+                navigate(`/error`);
             } else {
                 const data = await response.json();
                 console.log(data);
@@ -62,7 +67,7 @@ const UpdateCourse = () => {
             
         } catch (error) {
             console.log(error);
-            // navigate('/error');
+            navigate('/error');
             
         }
     };
@@ -87,14 +92,14 @@ const UpdateCourse = () => {
                             <p>By {course.User.firstName} {course.User.lastName}</p>
     
                             <label htmlFor="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription" ref={description} value={course.description} />
+                            <textarea id="courseDescription" name="courseDescription" ref={description} defaultValue={course.description} />
                         </div>
                         <div>
                             <label htmlFor="estimatedTime">Estimated Time</label>
                             <input id="estimatedTime" name="estimatedTime" type="text" ref={estimatedTime} defaultValue={course.estimatedTime} />
     
                             <label htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" ref={materialsNeeded} value={course.materialsNeeded} />
+                            <textarea id="materialsNeeded" name="materialsNeeded" ref={materialsNeeded} defaultValue={course.materialsNeeded} />
                         </div>
                     </div>
                     <button className="button" type="submit">Update Course</button>
@@ -103,7 +108,10 @@ const UpdateCourse = () => {
             </div>
         );
     } else {
-        <h2>No course details</h2>
+        // <h2>No course details</h2>
+        return (
+            <NotFound />
+        );
     }
 
 };

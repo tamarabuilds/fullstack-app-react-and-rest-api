@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../utils/apiHelper";
 
 import UserContext from "./context/UserContext";
+import NotFound from './NotFound';
 
 const CourseDetail = () => {
     const { authUser } = useContext(UserContext);
@@ -18,9 +19,12 @@ const CourseDetail = () => {
                 const json = await response.json();
                 if (response.status === 200) {
                     await setCourse(json);
+                } else if (response.status === 500) {
+                    navigate(`/error`);
                 }
             } catch (error) {
                 console.log(`Error fetching and parsing the data`, error)
+                navigate('/error');
             }
         }
         fetchData();
@@ -34,11 +38,14 @@ const CourseDetail = () => {
         if (response.status === 204) {
             console.log(`204 status for handleDelete`)
             navigate(`/`)
+        } else if (response.status === 500) {
+            navigate(`/error`);
         }
         try {
             console.log(`gonna delete`)
         } catch(error) {
             console.log(error)
+            navigate('/error');
         }
     }
 
@@ -96,7 +103,10 @@ const CourseDetail = () => {
         );
 
     } else {
-        <h2>No course details</h2>
+        // <h2>No course details</h2>
+        return (
+            <NotFound />
+        );
     }
 
 }
