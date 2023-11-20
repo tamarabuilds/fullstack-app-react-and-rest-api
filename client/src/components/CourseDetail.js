@@ -40,10 +40,10 @@ const CourseDetail = () => {
         } catch(error) {
             console.log(error)
         }
-
     }
 
     if (course) {
+        // Turn list of materials into li list without empty rows
         let listMaterials;
         if (course.materialsNeeded){
             listMaterials = course.materialsNeeded;
@@ -55,7 +55,8 @@ const CourseDetail = () => {
             <>
                 <div className="actions--bar">
                     <div className="wrap">
-                        { authUser.id === course.User.id  ?
+                        {/* Check if a user is logged in and if they are the owner of the course */}
+                        { authUser && authUser.id === course.User.id  ?
                         <>
                         <a className="button" href={`/courses/${id}/update`}>Update Course</a>
                         <a className="button" onClick={handleDelete}>Delete Course</a>
