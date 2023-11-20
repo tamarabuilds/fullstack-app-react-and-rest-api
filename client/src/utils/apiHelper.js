@@ -4,7 +4,6 @@ export const api = (
     body = null,
     credentials = null
     ) => {
-    
     const url = `http://localhost:5000/api` + path;
 
     const options = {

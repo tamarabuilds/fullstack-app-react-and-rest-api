@@ -36,7 +36,7 @@ const UpdateCourse = () => {
             }
         }
         fetchData();
-    }, [])
+    }, [id])
 
     // State
     const title = useRef(null)

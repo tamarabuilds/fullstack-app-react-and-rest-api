@@ -37,7 +37,7 @@ const CourseDetail = () => {
             }
         }
         fetchData();
-    }, [])
+    }, [id, navigate])
 
     // Event handler
     const handleDelete = async (event) => {
@@ -73,7 +73,7 @@ const CourseDetail = () => {
                         { authUser && authUser.id === course.User.id  ?
                         <>
                         <a className="button" href={`/courses/${id}/update`}>Update Course</a>
-                        <a className="button" onClick={handleDelete}>Delete Course</a>
+                        <button className='button' onClick={handleDelete}>Delete Course</button>
                         </>
                         :
                         null

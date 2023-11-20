@@ -32,7 +32,7 @@ const Courses = () => {
         }
 
         fetchData();
-    },[]);
+    },[navigate]);
    
 
     let listCourses;
