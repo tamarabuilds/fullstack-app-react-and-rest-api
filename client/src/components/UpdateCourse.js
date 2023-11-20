@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { api } from "../utils/apiHelper";
 
 import ErrorsDisplay from "./ErrorsDisplay";
@@ -85,34 +85,42 @@ const UpdateCourse = () => {
     
 
     if (course) {
-        return (
-            <div className="wrap">
-                <h2>Update Course</h2>
-                <ErrorsDisplay errors={errors}/>
-                <form onSubmit={handleSubmit}>
-                    <div className="main--flex">
-                        <div>
-                            <label htmlFor="courseTitle">Course Title</label>
-                            <input id="courseTitle" name="courseTitle" type="text" ref={title} defaultValue={course.title} />
-    
-                            <p>By {course.User.firstName} {course.User.lastName}</p>
-    
-                            <label htmlFor="courseDescription">Course Description</label>
-                            <textarea id="courseDescription" name="courseDescription" ref={description} defaultValue={course.description} />
+        // Redirect user to /forbidden if the course isn't owned by the authenticated user
+        if (authUser.id !== course.User.id) {
+            return (
+                <Navigate to='/forbidden'/>
+            )
+        } else {
+            // Authenticated user is owner of the course. Display course details to be updated.
+            return (
+                <div className="wrap">
+                    <h2>Update Course</h2>
+                    <ErrorsDisplay errors={errors}/>
+                    <form onSubmit={handleSubmit}>
+                        <div className="main--flex">
+                            <div>
+                                <label htmlFor="courseTitle">Course Title</label>
+                                <input id="courseTitle" name="courseTitle" type="text" ref={title} defaultValue={course.title} />
+        
+                                <p>By {course.User.firstName} {course.User.lastName}</p>
+        
+                                <label htmlFor="courseDescription">Course Description</label>
+                                <textarea id="courseDescription" name="courseDescription" ref={description} defaultValue={course.description} />
+                            </div>
+                            <div>
+                                <label htmlFor="estimatedTime">Estimated Time</label>
+                                <input id="estimatedTime" name="estimatedTime" type="text" ref={estimatedTime} defaultValue={course.estimatedTime} />
+        
+                                <label htmlFor="materialsNeeded">Materials Needed</label>
+                                <textarea id="materialsNeeded" name="materialsNeeded" ref={materialsNeeded} defaultValue={course.materialsNeeded} />
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="estimatedTime">Estimated Time</label>
-                            <input id="estimatedTime" name="estimatedTime" type="text" ref={estimatedTime} defaultValue={course.estimatedTime} />
-    
-                            <label htmlFor="materialsNeeded">Materials Needed</label>
-                            <textarea id="materialsNeeded" name="materialsNeeded" ref={materialsNeeded} defaultValue={course.materialsNeeded} />
-                        </div>
-                    </div>
-                    <button className="button" type="submit">Update Course</button>
-                    <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
-                </form>
-            </div>
-        );
+                        <button className="button" type="submit">Update Course</button>
+                        <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
+                    </form>
+                </div>
+            );
+        }
     } else {
         return (
             <NotFound />
