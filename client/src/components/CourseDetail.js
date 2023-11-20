@@ -6,6 +6,15 @@ import { api } from "../utils/apiHelper";
 import UserContext from "./context/UserContext";
 import NotFound from './NotFound';
 
+/**
+ * Provides "Course Details" screen by retreiving the detail for a course from 
+ * the REST API's /api/courses/:id route and rentering the course.
+ * 
+ * Also, the "Delete Course" and "Update Course" buttons only render for authenticated users
+ * that own the course.
+ * @returns CourseDetails component
+ */
+
 const CourseDetail = () => {
     const { authUser } = useContext(UserContext);
     const { id } = useParams();

@@ -1,9 +1,20 @@
 import { useContext, useRef, useState } from "react";
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { api } from '../utils/apiHelper';
 
 import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
+
+/**
+ * Allows a user to sign up by creating a new account.
+ * 
+ * Renders a 'Sign up' button that when clicked, sends a POST request
+ * to the REST API's /api/users route and signs in the user.
+ * 
+ * Also renders a 'Cancel' button that returns the user to the default list of courses.
+ * 
+ * @returns UserSignUp component
+ */
 
 const UserSignUp = () => {
     const { actions } = useContext(UserContext);

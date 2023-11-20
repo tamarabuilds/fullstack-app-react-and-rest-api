@@ -1,30 +1,38 @@
 import { createContext, useState } from "react";
 import Cookies from 'js-cookie';
 import { api } from "../../utils/apiHelper";
+import { useNavigate } from "react-router-dom";
 
 const UserContext = createContext(null);
 
+/**
+ * Managing global state of the app with the React Context API
+ * 
+ * Authenticated user, user signin(), and user signout() are defined in the
+ * <Provider> component and available throughout the application using Context API
+ * <Consumer> components 
+ * 
+ * @param {object} props 
+ * @returns Context API Provider component
+ */
+
 export const UserProvider = (props) => {
+    const navigate = useNavigate();
     const cookie = Cookies.get('authenticatedUser');
     const [authUser, setAuthUser] = useState(cookie ? JSON.parse(cookie) : null);
 
-
     const signIn = async (credentials) => {
-        console.log(`in signIn()`)
-        console.log(credentials)
-
         const response = await api('/users', 'GET', null, credentials);
-        console.log(response)
         if (response.status === 200){
-            console.log(`user signing in with status 200`)
             const user = await response.json();
             user.password = credentials.password;
-            console.log(credentials.password)
             setAuthUser(user);
             Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 1})
             return user
         } else if (response.status === 401) {
             return null
+        } else if (response.status === 500) {
+            navigate('/error')
         } else {
             throw new Error()
         }

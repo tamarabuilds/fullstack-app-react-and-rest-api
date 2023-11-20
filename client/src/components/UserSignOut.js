@@ -3,6 +3,12 @@ import { Navigate } from "react-router-dom";
 
 import UserContext from "./context/UserContext";
 
+/**
+ * Signs out the authenticated user and redirects them to the list of courses.
+ * 
+ * @returns Navigation to the default route list of courses
+ */
+
 const UserSignOut = () => {
     const { actions } = useContext(UserContext);
 

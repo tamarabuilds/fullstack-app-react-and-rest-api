@@ -5,6 +5,16 @@ import { api } from "../utils/apiHelper";
 import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
 
+/**
+ * Allows a user to create a new course.
+ * 
+ * Renders a "Create Course" button that when clicked, sends a 
+ * POST request to the REST API's /api/courses route. 
+ * 
+ * Also renders a "Cancel" button that returns the user to the root.
+ * @returns CreateCourse component
+ */
+
 const CreateCourse = () => {
     const { authUser } = useContext(UserContext);
     const navigate = useNavigate();

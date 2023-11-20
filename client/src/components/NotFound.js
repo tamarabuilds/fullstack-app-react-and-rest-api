@@ -1,3 +1,9 @@
+/**
+ * Displays a message letting the user know that the requested page can't be found.
+ * 
+ * @returns Not found display
+ */
+
 const NotFound = () => (
     <div className="wrap">
         <h2>Not Found</h2>

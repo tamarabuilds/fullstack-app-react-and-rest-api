@@ -2,6 +2,14 @@ import { useEffect, useState } from "react";
 import { api } from '../utils/apiHelper'
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Provides the list of courses from the REST API's /api/courses route.
+ * Each course links to its respective "Course Detail" screen.
+ * 
+ * Also renders a "Create Course" button
+ * @returns Courses component
+ */
+
 const Courses = () => {
     const [courses, setCourses] = useState(null);
     const navigate = useNavigate();

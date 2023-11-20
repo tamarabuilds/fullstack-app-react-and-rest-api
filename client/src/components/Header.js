@@ -1,6 +1,15 @@
 import { useContext } from "react";
 import UserContext from "./context/UserContext";
 
+/**
+ * Displays top menu bar for the application.
+ * 
+ * Includes sign in and sign up buttons if no one is authenticated.
+ * Includes user's name and sign out button if there's authenticated user.
+ * 
+ * @returns Header display component
+ */
+
 const Header = () => {
     const { authUser } = useContext(UserContext);
 

@@ -4,6 +4,16 @@ import { useNavigate, useLocation} from 'react-router-dom'
 import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
 
+/**
+ * Provides the 'Sign In' screen rendering a form allowing the user to sign in
+ * using their existing account information.
+ * 
+ * Renders a 'Sign In' button that when clicked signs in the user.
+ * Renders a 'Cancel' button that when clicked returns the user to root.
+ * 
+ * @returns UserSignIn component
+ */
+
 const UserSignIn = () => {
     const { actions } = useContext(UserContext);
     const navigate = useNavigate();

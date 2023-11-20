@@ -6,6 +6,17 @@ import ErrorsDisplay from "./ErrorsDisplay";
 import UserContext from "./context/UserContext";
 import NotFound from "./NotFound";
 
+/**
+ * Provides the user and ability to update a course they own.
+ * 
+ * Renders an 'Update Course' button that when clicked, sends a PUT
+ * request to the REST API's /api/courses/:id route.
+ * 
+ * Renders a 'Cancel' button that returns the user to the root.
+ * 
+ * @returns UpdateCourse component
+ */
+
 const UpdateCourse = () => {
     const { authUser } = useContext(UserContext);
     const { id } = useParams();
