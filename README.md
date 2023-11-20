@@ -3,6 +3,8 @@ Learn more about the developer on <a href="https://www.linkedin.com/in/tamarabui
 
 Unit 10 project for the Full Stack JavaScript Techdegree. Using React, this is a client interface for a fictional school database connecting to a REST API I created in the <a href="https://github.com/tamarabuilds/rest-api-sql" target="_blank">rest-api-sql</a> project. Users can search, add, update and delete courses in the DB with this new UI.
 
+![Screenshot 2023-11-20 at 10 17 06 AM](https://github.com/tamarabuilds/fullstack-app-with-react-and-rest-api/assets/98510821/72c52bde-29d7-466e-bdb8-5f53a1656794)
+
 ## How It's Made
 
 Tech used: HTML, CSS, JavaScript, Node.js, React, JSX, React Router, React Context API, Create React App
