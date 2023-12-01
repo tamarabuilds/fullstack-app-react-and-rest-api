@@ -39,7 +39,7 @@ const CreateCourse = () => {
         };
 
 
-        // to catch errors when using async/await, we need a try/catch block
+        // POST new course. If success, navigate to its detailed page
         try {
             const response = await api('/courses', 'POST', course, authUser);
             if (response.status === 201){

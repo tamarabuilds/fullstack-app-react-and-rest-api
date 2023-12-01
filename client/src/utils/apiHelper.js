@@ -17,7 +17,7 @@ export const api = (
 
     if (body) {
         options.body = JSON.stringify(body);
-        // bracket notation needed because Content-Tyoe is a string
+        // bracket notation needed because Content-Type is a string
         options.headers["Content-Type"] = "application/json; charset=utf-8";
     }
 
@@ -29,7 +29,5 @@ export const api = (
 
         options.headers["Authorization"] = `Basic ${encodedCredentials}`
     }
-
     return fetch (url, options);
-
 };

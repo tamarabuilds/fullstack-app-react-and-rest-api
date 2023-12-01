@@ -60,7 +60,6 @@ const Courses = () => {
             </a>
         </div>
     );
-
 }
 
 
