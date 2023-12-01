@@ -52,7 +52,6 @@ const UserSignIn = () => {
             console.log(error);
             navigate('/error');
         }
-
     }
 
     const handleCancel = (event) => {
