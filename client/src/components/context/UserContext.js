@@ -25,7 +25,9 @@ export const UserProvider = (props) => {
         const response = await api('/users', 'GET', null, credentials);
         if (response.status === 200){
             const user = await response.json();
+            // Store authenticated user in Cookies for 1 day
             Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 1})
+            // Store password with user object when creating, updating, or deleting with the api
             user.password = credentials.password;
             setAuthUser(user);
             return user
