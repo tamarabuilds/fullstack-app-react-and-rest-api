@@ -57,7 +57,6 @@ const CourseDetail = () => {
     }
 
     if (course) {
-        // Turn list of materials into li list without empty rows
         let listMaterials;
         if (course.materialsNeeded){
             listMaterials = course.materialsNeeded;
