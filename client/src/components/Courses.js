@@ -14,8 +14,8 @@ const Courses = () => {
     const [courses, setCourses] = useState(null);
     const navigate = useNavigate();
 
+    // Trigger calling the GET api for all courses at rendering 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
                 const response = await api('/courses', 'GET')
@@ -30,7 +30,7 @@ const Courses = () => {
                 navigate('/error');
             }
         }
-
+        // Call async api function
         fetchData();
     },[navigate]);
    

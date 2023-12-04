@@ -23,6 +23,7 @@ const UpdateCourse = () => {
     const [course, setCourse] = useState();
     const navigate = useNavigate();
 
+    // Trigger calling the GET api for an individual course at rendering
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -35,6 +36,7 @@ const UpdateCourse = () => {
                 console.log(`Error fetching and parsing the data`, error);
             }
         }
+        // Call async api
         fetchData();
     }, [id])
 
@@ -57,7 +59,7 @@ const UpdateCourse = () => {
             materialsNeeded: materialsNeeded.current.value,
         };
 
-        // catch errors in try/catch blocks when using async/await
+        // PUT an update for the individual course
         try {
             const response = await api(`/courses/${id}`, 'PUT', course, authUser);
             if (response.status === 204) {
